@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+<title>Paperboard web flasher</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="vendor/esp-web-tools/install-button.js"></script>
+</head>
+<body>
+<main>
+<h1>Paperboard web flasher</h1>
+<p>Installs the Paperboard firmware on a blank or old display board directly from this page. Later updates come
+over Wi-Fi from the Paperboard Homey app, so you only need this page once per board.</p>
+
+<h2>1. Check your browser</h2>
+<p>Use <strong>Chrome or Edge on a computer</strong> (Windows, macOS, Linux). Safari, Firefox, iPhones and iPads
+do not support Web Serial. Use a USB cable that carries data, not a charge-only cable.</p>
+
+<h2>2. Install</h2>
+<div class="board">
+<h3>WeMos D1 mini (ESP8266) with a 4.2" b/w panel</h3>
+<p><esp-web-install-button manifest="manifest-d1_mini.json">
+<button slot="activate">Install on D1 mini</button>
+<span slot="unsupported">This browser cannot flash. Use Chrome or Edge on a computer.</span>
+<span slot="not-allowed">This page must be opened over HTTPS or from localhost.</span>
+</esp-web-install-button></p>
+<ul>
+<li>Pick the port <em>USB-SERIAL CH340</em>. Some systems need the CH340 driver first (USB id 1a86:7523).</li>
+</ul>
+</div>
+<div class="board">
+<h3>NM-EPD-420 (ESP32-S3) with a 4.2" b/w/red panel</h3>
+<p><esp-web-install-button manifest="manifest-nm_epd_420.json">
+<button slot="activate">Install on NM-EPD-420</button>
+<span slot="unsupported">This browser cannot flash. Use Chrome or Edge on a computer.</span>
+<span slot="not-allowed">This page must be opened over HTTPS or from localhost.</span>
+</esp-web-install-button></p>
+<ul>
+<li>Put the board in download mode first: hold <strong>BOOT</strong>, press <strong>RESET</strong>, release
+<strong>BOOT</strong>. Then pick the port that appears (USB JTAG/serial).</li>
+<li>If the board does not restart after flashing, press <strong>RESET</strong>.</li>
+</ul>
+</div>
+
+<h2>Notes</h2>
+<ul>
+<li>Tick <strong>Erase device</strong> only for a first install or for a board that ran other firmware. Erasing removes
+the Wi-Fi settings <strong>and the Homey pairing</strong>: afterwards delete the old device in Homey and add the display
+again; its layout is lost (there is no export yet).</li>
+<li>To update a display that is already set up, leave <strong>Erase device</strong> unticked: Wi-Fi and pairing are kept.</li>
+<li>After flashing the display (after an erase) shows <em>Paperboard setup</em> with a QR code. Join its Wi-Fi network and enter your
+home Wi-Fi there. This page cannot set up Wi-Fi, ignore a possible "Connect to Wi-Fi" prompt of the flasher.</li>
+<li>The page runs entirely from this site: no external scripts, nothing is uploaded.</li>
+</ul>
+
+<h2>Without the browser (esptool)</h2>
+<p>Download the image of your board from the links below, then use
+<a href="https://github.com/espressif/esptool/releases">esptool</a> (esptool v5 spells the commands
+<code>erase-flash</code> and <code>write-flash</code>):</p>
+<pre>esptool.py --chip esp8266 erase_flash
+esptool.py --chip esp8266 --baud 115200 write_flash 0x0 paperboard-d1_mini-&lt;version&gt;-factory.bin
+
+esptool.py --chip esp32s3 erase_flash
+esptool.py --chip esp32s3 write_flash 0x0 paperboard-nm_epd_420-&lt;version&gt;-factory.bin</pre>
+<!--downloads-->
+<ul>
+<li><a href="firmware/paperboard-d1_mini-5.5.0-factory.bin">paperboard-d1_mini-5.5.0-factory.bin</a> (D1 mini, flash offset 0)</li>
+<li><a href="firmware/paperboard-nm_epd_420-5.5.0-factory.bin">paperboard-nm_epd_420-5.5.0-factory.bin</a> (NM-EPD-420, flash offset 0)</li>
+<li><a href="source/paperboard-firmware-5.5.0-src.tar.gz">paperboard-firmware-5.5.0-src.tar.gz</a> (source, GPL-3.0)</li>
+</ul>
+<!--/downloads-->
+
+<h2>Licence and source</h2>
+<p>The firmware contains GxEPD2 (GPL-3.0) and is distributed under the terms of the GPL-3.0; it also contains the
+LGPL-2.1 Arduino cores for ESP8266 and ESP32 and Apache-2.0 ESP-IDF parts. The corresponding source code of the
+firmware, with build instructions and the licence list, is in
+<code>source/</code>, linked in the download list above. The page itself uses
+<a href="vendor/esp-web-tools/LICENSE">ESP Web Tools</a> (Apache-2.0).</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,5 @@
+body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; color: #111; background: #fafafa; }
+main { max-width: 42rem; margin: 0 auto; padding: 1rem; }
+.board { border: 1px solid #ccc; border-radius: 6px; padding: 0 1rem; margin: 1rem 0; background: #fff; }
+pre { overflow-x: auto; background: #eee; padding: .5rem; }
+button[slot="activate"] { font-size: 1rem; padding: .5rem 1rem; cursor: pointer; }
