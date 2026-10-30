@@ -43,6 +43,21 @@ do not support Web Serial. Use a USB cable that carries data, not a charge-only 
 <li>If the board does not restart after flashing, press <strong>RESET</strong>.</li>
 </ul>
 </div>
+<div class="board">
+<h3>TRMNL 7.5" OG DIY kit (ESP32-S3) with an 800x480 b/w panel</h3>
+<p><esp-web-install-button manifest="manifest-trmnl_75.json">
+<button slot="activate">Install on TRMNL 7.5"</button>
+<span slot="unsupported">This browser cannot flash. Use Chrome or Edge on a computer.</span>
+<span slot="not-allowed">This page must be opened over HTTPS or from localhost.</span>
+</esp-web-install-button></p>
+<ul>
+<li>Needs the Paperboard Homey app of the same release or newer.</li>
+<li>Put the board in download mode first: hold <strong>BOOT</strong> on the XIAO module, press <strong>RESET</strong>,
+release <strong>BOOT</strong>. Then pick the port that appears (USB JTAG/serial).</li>
+<li>The NM-EPD-420 and the TRMNL both use an ESP32-S3, so this page cannot tell them apart: pick the button of your
+board. A wrong image does no harm to the hardware; flash the right one again (download mode, as above).</li>
+</ul>
+</div>
 
 <h2>Notes</h2>
 <ul>
@@ -63,12 +78,15 @@ home Wi-Fi there. This page cannot set up Wi-Fi, ignore a possible "Connect to W
 esptool.py --chip esp8266 --baud 115200 write_flash 0x0 paperboard-d1_mini-&lt;version&gt;-factory.bin
 
 esptool.py --chip esp32s3 erase_flash
-esptool.py --chip esp32s3 write_flash 0x0 paperboard-nm_epd_420-&lt;version&gt;-factory.bin</pre>
+esptool.py --chip esp32s3 write_flash 0x0 paperboard-nm_epd_420-&lt;version&gt;-factory.bin
+
+(TRMNL 7.5": the same with paperboard-trmnl_75-&lt;version&gt;-factory.bin)</pre>
 <!--downloads-->
 <ul>
-<li><a href="firmware/paperboard-d1_mini-5.15.0-factory.bin">paperboard-d1_mini-5.15.0-factory.bin</a> (D1 mini, flash offset 0)</li>
-<li><a href="firmware/paperboard-nm_epd_420-5.15.0-factory.bin">paperboard-nm_epd_420-5.15.0-factory.bin</a> (NM-EPD-420, flash offset 0)</li>
-<li><a href="source/paperboard-firmware-5.15.0-src.tar.gz">paperboard-firmware-5.15.0-src.tar.gz</a> (source, GPL-3.0)</li>
+<li><a href="firmware/paperboard-d1_mini-6.1.0-factory.bin">paperboard-d1_mini-6.1.0-factory.bin</a> (D1 mini, flash offset 0)</li>
+<li><a href="firmware/paperboard-nm_epd_420-6.1.0-factory.bin">paperboard-nm_epd_420-6.1.0-factory.bin</a> (NM-EPD-420, flash offset 0)</li>
+<li><a href="firmware/paperboard-trmnl_75-6.1.0-factory.bin">paperboard-trmnl_75-6.1.0-factory.bin</a> (TRMNL 7.5", flash offset 0)</li>
+<li><a href="source/paperboard-firmware-6.1.0-src.tar.gz">paperboard-firmware-6.1.0-src.tar.gz</a> (source, GPL-3.0)</li>
 </ul>
 <!--/downloads-->
 
