@@ -1,13 +1,13 @@
 {
   "name": "Paperboard D1 mini",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "new_install_prompt_erase": true,
   "builds": [
     {
       "chipFamily": "ESP8266",
       "parts": [
         {
-          "path": "firmware/paperboard-d1_mini-6.1.0-factory.bin",
+          "path": "firmware/paperboard-d1_mini-6.2.0-factory.bin",
           "offset": 0
         }
       ]
